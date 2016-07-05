@@ -1,13 +1,13 @@
 var DataStructures = require('algorithms').DataStructures;
 var Stack = DataStructures.Stack;
 
-function Parenthesis(string) {
+function parenthesis(string) {
 
   var sequence = new Stack();
 
-  var match = { '(' : ')',
-                '[' : ']',
-                '{' : '}'
+  var match = { ')' : '(',
+                ']' : '[',
+                '}' : '{'
               };
 
   for (var i = 0; i < string.length; i++) {
@@ -16,17 +16,16 @@ function Parenthesis(string) {
 
       sequence.push(string.charAt(i));
 
-    } else if ( (/[\(\[\{]/).test(string.charAt(i)) &&
-               match[string.charAt(i)] == sequence.top()) {
+    } else if ( match.hasOwnProperty(string.charAt(i)) &&
+    (match[string.charAt(i)] === sequence.peek()) ) {
 
       sequence.pop();
     } else {
 
      return false;
    }
-
-   return true;
  }
+ return true;
 }
 
-console.log(Parenthesis(string));
+console.log(parenthesis(string));
